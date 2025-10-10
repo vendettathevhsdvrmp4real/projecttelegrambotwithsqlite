@@ -1,7 +1,7 @@
-# projecttelegrambotwithsqlite
+#Телеграмм-бот для технической поддержки
 Project Telegram Bot (telebot module) with SQLite
 
-Телеграмм-бот для технической поддержки:
+
 
 Требования:
 > [!WARNING]
