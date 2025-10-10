@@ -1,4 +1,4 @@
-#Телеграмм-бот для технической поддержки
+# Телеграмм-бот для технической поддержки
 Project Telegram Bot (telebot module) with SQLite
 
 
