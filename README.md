@@ -8,7 +8,7 @@ Project Telegram Bot (telebot module) with SQLite
 > Telebot (pyTelegrambotAPI)
 > Python
 > VSCode (или же Обычный способ)
-> [!IMPORTANT]
+> AND
 > YOU NEED LAUNCH FIRST LOGIC.PY AND THEN MAIN.PY
 
 
