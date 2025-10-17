@@ -38,15 +38,11 @@ def register2(message):
 
 
 
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: not message.text.startswith('/'))
 def handle_message(message):
-    # Игнорируем команды, они обрабатываются другими хэндлерами
-    if message.text.startswith('/'):
-        return
-
     user_text = message.text.strip()
     answer = get_answer(user_text)
-
+    
     if answer:
         bot.reply_to(message, f"Ответ: {answer}")
     else:
@@ -59,7 +55,7 @@ def help_command(message):
 @bot.message_handler(commands=['contact'])
 def contact_command(message):
      bot.reply_to(message, "Вы можете связаться с нашей поддержкой, выбрав один из вариантов ниже:")
-     bot.reply_tO(message, "@") #insert your tg username
+     bot.reply_to(message, "@") #insert your tg username
 
 if __name__ == '__main__':
     manager = DatabaseManager(DATABASE)
