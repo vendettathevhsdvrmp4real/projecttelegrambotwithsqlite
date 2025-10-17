@@ -1,0 +1,2 @@
+DATABASE = 'support.db'
+API_TOKEN = 'YOUR TOKEN TG BOT'
