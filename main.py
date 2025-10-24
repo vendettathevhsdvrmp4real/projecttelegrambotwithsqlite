@@ -13,6 +13,17 @@ db = DatabaseManager(DATABASE)
 
 @bot.message_handler(commands=['start'])
 def start_handler(message):
+        
+    telegram_id = message.from_user.id
+
+    # Проверяем, есть ли пользователь в БД
+    user = db.get_user_name(telegram_id)
+
+    if user:
+        name = user["name"]
+        bot.send_message(message.chat.id, "С возвращением, {name}! 😊 Очень приятно снова видеть тебя здесь.")
+        bot.send_message(message.chat.id, "Пожалуйста, опиши свой вопрос или проблему в одном сообщении.")
+    else:
         bot.send_message(message.chat.id, "👋 Привет! Это служба поддержки [Название вашего бота/сервиса]. Пожалуйста, опишите ваш вопрос/проблему в одном сообщении. Наши операторы работают с [Указать время работы, например: test].")
         bot.send_message(message.chat.id, "Но для начало, мне нужно сказать твоё имя для тех поддержка")
         bot.send_message(message.chat.id, "Введите своё имя")
@@ -30,6 +41,7 @@ def register2(message):
         # Отправка сообщения об успешном сохранении
         bot.send_message(message.chat.id, f"Отлично, **{name}**! Твоё имя успешно сохранено. 🎉")
         bot.send_message(message.chat.id, f"Приятно познакомиться, {name}!")
+        bot.send_message(message.chat.id, "Опишите свою проблему:")
 
     except Exception as e:
         # В случае ошибки выводим сообщение об ошибке
@@ -51,11 +63,14 @@ def handle_message(message):
 @bot.message_handler(commands=['help'])
 def help_command(message):
      bot.reply_to(message, "/contact - Связаться с поддержкой ")
+     bot.reply_to(message, "Если простой вопросы, то ответ сразу от бот")
 
 @bot.message_handler(commands=['contact'])
 def contact_command(message):
      bot.reply_to(message, "Вы можете связаться с нашей поддержкой, выбрав один из вариантов ниже:")
      bot.reply_to(message, "@") #insert your tg username
+     bot.reply_to(message, "mallto:") #insert your email (im don't know why?)
+     bot.reply_to(message, "https://example.com") #Insert your Website
 
 if __name__ == '__main__':
     manager = DatabaseManager(DATABASE)

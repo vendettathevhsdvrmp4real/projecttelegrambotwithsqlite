@@ -13,7 +13,8 @@ class DatabaseManager:
             conn.execute('''CREATE TABLE IF NOT EXISTS feedback (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
                             telegram_id INTEGER UNIQUE,
-                            name TEXT
+                            name TEXT,
+                            problem TEXT
                         )''') 
             conn.commit()
         print("База данных успешно создана.")
@@ -43,13 +44,14 @@ class DatabaseManager:
         conn.close()
 
     def get_user_name(self, telegram_id):
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
-        cursor.execute('SELECT name FROM feedback WHERE telegram_id=?', (telegram_id,))
-        result = cursor.fetchone()
-        conn.close()
-        return result[0] if result else None
-
+        conn = sqlite3.connect(self.database)
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM feedback WHERE telegram_id = ?", (telegram_id,))
+        row = cur.fetchone()
+        if row:
+            # Возвращаем имя как словарь
+            return {"telegram_id": telegram_id, "name": row[0]}
+        return None
     
     
 
